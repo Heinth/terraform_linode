@@ -1,0 +1,29 @@
+name: Terraform
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Apply
+      id: apply
+      run: terraform apply -auto-approve
+      env:
+        TF_VAR_linode_token: ${{ secrets.LINODE_TOKEN }}
+
+    - name: Output
+      run: echo "Server created with IP $(terraform output -raw server_ip)"
