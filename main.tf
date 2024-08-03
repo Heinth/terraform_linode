@@ -9,7 +9,7 @@ terraform {
 
 
 provider "linode" {
-  token = "$LINODE_TOKEN"
+  token = "3a79182c51ac78e93c33ead2e03b5aee23658dae8c3e6317fbcc851c176d4a16"
 }
 
 resource "linode_instance" "my_instance" {
